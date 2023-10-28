@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Editor</title>
+    <style>
+        /* Add your CSS styling here */
+    </style>
+</head>
+<body>
+    <h1>Blog Editor</h1>
+
+    <div>
+        <h2>Add Text</h2>
+        <textarea id="text" rows="4" cols="50" placeholder="Write your text here"></textarea>
+    </div>
+
+    <div>
+        <h2>Add Images</h2>
+        <input type="file" id="image" accept="image/*">
+        <img id="image-preview" alt="Image Preview" style="max-width: 100%; display: none;">
+    </div>
+
+    <div>
+        <h2>Add Videos</h2>
+        <input type="file" id="video" accept="video/*">
+        <video id="video-preview" controls style="max-width: 100%; display: none;"></video>
+    </div>
+
+    <button id="add-element">Add Element to Blog</button>
+
+    <div id="blog-content">
+        <!-- The added blog elements will be displayed here -->
+    </div>
+
+    <script>
+        const textArea = document.getElementById("text");
+        const imageInput = document.getElementById("image");
+        const imagePreview = document.getElementById("image-preview");
+        const videoInput = document.getElementById("video");
+        const videoPreview = document.getElementById("video-preview");
+        const blogContent = document.getElementById("blog-content");
+        const addElementButton = document.getElementById("add-element");
+
+        addElementButton.addEventListener("click", function() {
+            const text = textArea.value;
+            const image = imagePreview.src;
+            const video = videoPreview.src;
+
+            // Create and append elements to the blog
+            if (text) {
+                const textElement = document.createElement("p");
+                textElement.textContent = text;
+                blogContent.appendChild(textElement);
+            }
+            if (image) {
+                const imageElement = document.createElement("img");
+                imageElement.src = image;
+                blogContent.appendChild(imageElement);
+            }
+            if (video) {
+                const videoElement = document.createElement("video");
+                videoElement.src = video;
+                videoElement.controls = true;
+                blogContent.appendChild(videoElement);
+            }
+
+            // Clear input fields and previews
+            textArea.value = "";
+            imageInput.value = "";
+            imagePreview.src = "";
+            imagePreview.style.display = "none";
+            videoInput.value = "";
+            videoPreview.src = "";
+            videoPreview.style.display = "none";
+        });
+
+        imageInput.addEventListener("change", function() {
+            if (imageInput.files.length > 0) {
+                const file = imageInput.files[0];
+                const url = URL.createObjectURL(file);
+                imagePreview.src = url;
+                imagePreview.style.display = "block";
+            }
+        });
+
+        videoInput.addEventListener("change", function() {
+            if (videoInput.files.length > 0) {
+                const file = videoInput.files[0];
+                const url = URL.createObjectURL(file);
+                videoPreview.src = url;
+                videoPreview.style.display = "block";
+            }
+        });
+    </script>
+</body>
+</html>
