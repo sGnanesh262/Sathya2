@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Conferencing App</title>
+</head>
+<body>
+  <h1>Video Conferencing</h1>
+
+  <!-- Video display for local and remote streams -->
+  <div id="videos">
+    <video id="localVideo" autoplay muted></video>
+  </div>
+
+  <!-- Text chat interface -->
+  <div id="chat">
+    <input type="text" id="messageInput" placeholder="Type a message...">
+    <button id="sendMessage">Send</button>
+    <ul id="messages"></ul>
+  </div>
+
+  <!-- Include socket.io and peer.js libraries -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/peerjs@0.6.1/dist/peer.js"></script>
+
+  <!-- Include the client-side JavaScript file -->
+  <script src="client.js"></script>
+</body>
+</html>
